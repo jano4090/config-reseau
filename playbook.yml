@@ -1,0 +1,19 @@
+---
+- name: Configuration de base de la machine Rocky Linux
+  hosts: rocky_linux
+  become: yes  # Pour avoir les droits administrateur (root)
+
+  tasks:
+    - name: Changer le nom d'hôte
+      ansible.builtin.hostname:
+        name: rocky-nouveau-nom  # Le nouveau nom que vous voulez
+
+    - name: Configurer la carte réseau avec une IP fixe
+      ansible.builtin.nmcli:
+        conn_name: ens33  # Le nom de votre interface réseau (vérifiez avec 'ip a' dans la VM)
+        ifname: ens33
+        type: ethernet
+        ip4: 192.168.1.100/24  # La nouvelle IP fixe
+        gw4: 192.168.1.1       # L'adresse de votre box/routeur
+        dns4: 8.8.8.8
+        state: present
