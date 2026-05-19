@@ -6,12 +6,12 @@
   tasks:
     - name: Changer le nom d'hôte
       ansible.builtin.hostname:
-        name: rocky10  # Le nouveau nom que vous voulez
+        name: fedora44  # Le nouveau nom que vous voulez
 
     - name: Configurer la carte réseau avec une IP fixe
       ansible.builtin.nmcli:
-        conn_name: ens33  # Le nom de votre interface réseau (vérifiez avec 'ip a' dans la VM)
-        ifname: ens33
+        conn_name: enp0s3  # Le nom de votre interface réseau (vérifiez avec 'ip a' dans la VM)
+        ifname: enp0s3
         type: ethernet
         ip4: 192.168.1.69/24  # La nouvelle IP fixe
         gw4: 192.168.1.1       # L'adresse de votre box/routeur
